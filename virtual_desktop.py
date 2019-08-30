@@ -5,14 +5,14 @@ import os
 from ctypes import cdll
 import win32gui
 
-path = os.path.dirname(os.path.realpath(__file__)) 
-vda = cdll.LoadLibrary(os.path.join(path,'VirtualDesktopAccessor.dll'))
+path = os.path.dirname(os.path.realpath(__file__))
+vda = cdll.LoadLibrary(os.path.join(path,'VirtualDesktopAccessor32.dll'))
 
 def move_window_to_desktop_number(hwnd,n):
-    vda.MoveWindowToDesktopNumber(hwnd,n) 
+    vda.MoveWindowToDesktopNumber(hwnd,n)
 
 def get_current_desktop_number():
-    return vda.GetCurrentDesktopNumber() 
+    return vda.GetCurrentDesktopNumber()
 
 def get_desktop_id_by_number(n):
     return vda.GetDesktopIdByNumber(n)
@@ -39,7 +39,7 @@ def go_to_desktop_number(n=0):
     vda.GoToDesktopNumber(n)
 
 def move_current_window_to_desktop(n=0,follow=True):
-    wndh = win32gui.GetForegroundWindow()   
+    wndh = win32gui.GetForegroundWindow()
     vda.MoveWindowToDesktopNumber(wndh,n)
     if follow:
         vda.GoToDesktopNumber(n)
